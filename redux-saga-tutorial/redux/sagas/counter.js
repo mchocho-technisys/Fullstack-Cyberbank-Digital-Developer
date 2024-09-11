@@ -1,21 +1,14 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import {
-  COUNTER_ACTIONS,
-  incrementError,
-  incrementSuccess,
-} from "../actions/counter";
+import { COUNTER_ACTIONS, actions } from "../reducers/counter";
 
 function* increment() {
   try {
     const data = yield call(
-      () =>
-        new Promise((resolve) =>
-          setTimeout(() => resolve(["item1", "item2"]), 1000)
-        )
+      () => new Promise((resolve) => setTimeout(() => resolve(1), 100))
     );
-    yield put(incrementSuccess(data));
+    yield put(actions.incrementSuccess(data));
   } catch (error) {
-    yield put(incrementError(error));
+    yield put(actions.incrementError(error));
   }
 }
 
